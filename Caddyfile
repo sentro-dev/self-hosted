@@ -1,0 +1,19 @@
+{$DOMAIN_APP} {
+	encode gzip
+	reverse_proxy app:3001
+}
+
+{$DOMAIN_ADMIN} {
+	encode gzip
+	reverse_proxy admin:3002
+}
+
+{$DOMAIN_API} {
+	encode gzip
+	reverse_proxy api:4000
+}
+
+{$DOMAIN_DOCS} {
+	encode gzip
+	reverse_proxy docs:3003
+}

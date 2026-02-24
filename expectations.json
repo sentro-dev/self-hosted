@@ -1,0 +1,45 @@
+[
+  {
+    "httpRequest": { "path": "/healthy" },
+    "httpResponse": { "statusCode": 200, "body": "OK" },
+    "priority": 0
+  },
+  {
+    "httpRequest": { "path": "/down" },
+    "httpResponse": { "statusCode": 500, "body": "Service Unavailable" },
+    "priority": 0
+  },
+  {
+    "httpRequest": { "path": "/slow" },
+    "httpResponse": {
+      "statusCode": 200,
+      "body": "OK",
+      "delay": { "timeUnit": "MILLISECONDS", "value": 8000 }
+    },
+    "priority": 0
+  },
+  {
+    "httpRequest": { "path": "/flapping" },
+    "httpResponse": { "statusCode": 200, "body": "OK" },
+    "times": { "remainingTimes": 3, "unlimited": false },
+    "priority": 5
+  },
+  {
+    "httpRequest": { "path": "/flapping" },
+    "httpResponse": { "statusCode": 500, "body": "Error" },
+    "times": { "remainingTimes": 2, "unlimited": false },
+    "priority": 4
+  },
+  {
+    "httpRequest": { "path": "/random-errors" },
+    "httpResponse": { "statusCode": 200, "body": "OK" },
+    "times": { "remainingTimes": 5, "unlimited": false },
+    "priority": 5
+  },
+  {
+    "httpRequest": { "path": "/random-errors" },
+    "httpResponse": { "statusCode": 502, "body": "Bad Gateway" },
+    "times": { "remainingTimes": 1, "unlimited": false },
+    "priority": 4
+  }
+]
