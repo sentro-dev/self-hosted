@@ -21,13 +21,13 @@
   {
     "httpRequest": { "path": "/flapping" },
     "httpResponse": { "statusCode": 200, "body": "OK" },
-    "times": { "remainingTimes": 3, "unlimited": false },
+    "times": { "remainingTimes": 1, "unlimited": false },
     "priority": 5
   },
   {
     "httpRequest": { "path": "/flapping" },
     "httpResponse": { "statusCode": 500, "body": "Error" },
-    "times": { "remainingTimes": 2, "unlimited": false },
+    "times": { "remainingTimes": 4, "unlimited": false },
     "priority": 4
   },
   {
