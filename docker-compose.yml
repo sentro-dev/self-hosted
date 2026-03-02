@@ -161,7 +161,7 @@ services:
     # Currently uses "db push" because no migrations/ directory exists yet.
     command: >
       sh -c "cd /migrate && node node_modules/prisma/build/index.js db push
-      --skip-generate --schema=schema.prisma &&
+      --schema=schema.prisma &&
       node seed.js || echo 'Database setup completed (seed may have already run)'"
     environment:
       <<: *app-env
