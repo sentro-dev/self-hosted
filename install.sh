@@ -102,7 +102,7 @@ setup_directory() {
 download_files() {
   info "Downloading configuration files..."
 
-  local FILES=(docker-compose.yml Caddyfile .env.example prometheus.yml expectations.json)
+  local FILES=(docker-compose.yml Caddyfile .env.example prometheus.yml server.mjs)
 
   # If running from the repo, copy locally. Otherwise, download.
   SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
