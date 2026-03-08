@@ -34,7 +34,6 @@ x-common: &common
 
 x-app-env: &app-env
   NODE_ENV: production
-  DATABASE_PROVIDER: postgresql
   DATABASE_URL: postgresql://${POSTGRES_USER:-sentro}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-sentro}
   REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379
   AUTH_SECRET: ${AUTH_SECRET}
@@ -45,7 +44,7 @@ x-app-env: &app-env
   ADMIN_EMAIL: ${ADMIN_EMAIL}
   ADMIN_PASSWORD: ${ADMIN_PASSWORD}
   ADMIN_SESSION_SECRET: ${ADMIN_SESSION_SECRET}
-  API_CORS_ORIGIN: ${API_CORS_ORIGIN:-http://localhost:3001,http://localhost:3002}
+  CORS_ORIGIN: ${API_CORS_ORIGIN:-http://localhost:3001,http://localhost:3002}
   SELF_HOSTED: "true"
   LICENSE_KEY: ${SENTRO_LICENSE_KEY:-}
   LICENSE_CHECK_URL: ${LICENSE_CHECK_URL:-}
@@ -58,14 +57,8 @@ x-app-env: &app-env
   AUTH_GOOGLE_SECRET: ${AUTH_GOOGLE_SECRET:-}
   AUTH_GITHUB_ID: ${AUTH_GITHUB_ID:-}
   AUTH_GITHUB_SECRET: ${AUTH_GITHUB_SECRET:-}
-  AI_PROVIDER: ${AI_PROVIDER:-}
-  OPENAI_API_KEY: ${OPENAI_API_KEY:-}
-  ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
-  SMS_PROVIDER: ${SMS_PROVIDER:-}
-  TWILIO_ACCOUNT_SID: ${TWILIO_ACCOUNT_SID:-}
-  TWILIO_AUTH_TOKEN: ${TWILIO_AUTH_TOKEN:-}
-  TWILIO_FROM_NUMBER: ${TWILIO_FROM_NUMBER:-}
   NEXT_PUBLIC_APP_URL: ${AUTH_URL:-http://localhost:3001}
+  STATUS_PAGE_CUSTOM_DOMAINS: ${STATUS_PAGE_CUSTOM_DOMAINS:-}
 
 services:
   # ==========================================================================
