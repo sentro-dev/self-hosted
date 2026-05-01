@@ -150,8 +150,12 @@ services:
   migrate:
     image: ${SENTRO_IMAGE_REGISTRY:-ghcr.io/sentro-dev/platform}/sentro-app:${SENTRO_IMAGE_TAG:-latest}
     container_name: sentro-migrate
-    # NOTE: Switch to "prisma migrate deploy" once migration files are generated.
-    # Currently uses "db push" because no migrations/ directory exists yet.
+    # NOTE: Migration files exist as of 1.0.0 (baseline: 20260501205346_init).
+    # This still uses "db push" because the live dev/prod DBs were created via
+    # db push and have no _prisma_migrations table. To switch to
+    # "prisma migrate deploy", first baseline the live DB:
+    #   prisma migrate resolve --applied 20260501205346_init
+    # then change the command below to: prisma migrate deploy && node seed.js
     command: >
       sh -c "cd /migrate && node node_modules/prisma/build/index.js db push
       --schema=schema.prisma &&
