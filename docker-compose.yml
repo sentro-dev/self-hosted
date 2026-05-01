@@ -150,16 +150,16 @@ services:
   migrate:
     image: ${SENTRO_IMAGE_REGISTRY:-ghcr.io/sentro-dev/platform}/sentro-app:${SENTRO_IMAGE_TAG:-latest}
     container_name: sentro-migrate
-    # NOTE: Migration files exist as of 1.0.0 (baseline: 20260501205346_init).
-    # This still uses "db push" because the live dev/prod DBs were created via
-    # db push and have no _prisma_migrations table. To switch to
-    # "prisma migrate deploy", first baseline the live DB:
-    #   prisma migrate resolve --applied 20260501205346_init
-    # then change the command below to: prisma migrate deploy && node seed.js
+    # Self-hosted note: a fresh install runs `migrate deploy` against an empty
+    # DB and applies the full baseline. If you are upgrading from a pre-1.0.0
+    # install (where the schema was created via `db push`), run a one-time
+    # baseline first:
+    #   docker run --rm --network <net> -e DATABASE_URL=... <image> \
+    #     sh -c 'cd /migrate && node node_modules/prisma/build/index.js \
+    #       migrate resolve --applied 20260501205346_init'
     command: >
-      sh -c "cd /migrate && node node_modules/prisma/build/index.js db push
-      --schema=schema.prisma &&
-      node seed.js || echo 'Database setup completed (seed may have already run)'"
+      sh -c "cd /migrate && node node_modules/prisma/build/index.js migrate deploy &&
+      node seed.mjs || echo 'Database setup completed (seed may have already run)'"
     environment:
       <<: *app-env
     depends_on:
